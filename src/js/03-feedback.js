@@ -3,11 +3,14 @@ import throttle from 'lodash.throttle';
 
 const feedbackFormEl = document.querySelector('.feedback-form');
 console.dir(feedbackFormEl);
-const userData = {};
+let userData = {};
 
 const fillContactFormFields = () => {
   const contactFormDataFromLS = localstorageService.load('feedback-form-state');
-
+  if (contactFormDataFromLS === undefined) {
+    return;
+  }
+  userData = { ...contactFormDataFromLS };
   for (const prop in contactFormDataFromLS) {
     if (contactFormDataFromLS.hasOwnProperty(prop)) {
       //   console.log(prop);
@@ -32,4 +35,4 @@ const onContactFormSubmit = event => {
 };
 
 feedbackFormEl.addEventListener('input', throttle(onFormFieldsChenge, 500));
-feedbackFormEl.addEventListener('submit', throttle(onContactFormSubmit, 500));
+feedbackFormEl.addEventListener('submit', onContactFormSubmit);
