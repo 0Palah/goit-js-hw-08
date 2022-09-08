@@ -30,6 +30,7 @@ const onFormFieldsChenge = evt => {
 const onContactFormSubmit = event => {
   event.preventDefault();
 
+  console.log(localstorageService.load('feedback-form-state'));
   localstorageService.remove('feedback-form-state');
   feedbackFormEl.reset();
 };
