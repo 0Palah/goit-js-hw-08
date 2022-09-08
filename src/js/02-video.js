@@ -7,6 +7,9 @@ console.log(iframeEl);
 const player = new Player(iframeEl);
 console.log(player);
 
+let savedCurrentTime = localStorage.getItem('videoplayer-current-time');
+setSavedCurrentTime();
+
 const currentVideoTime = data => {
   console.log(data);
   localStorage.setItem('videoplayer-current-time', data.seconds);
@@ -14,5 +17,12 @@ const currentVideoTime = data => {
 
 player.on('timeupdate', throttle(currentVideoTime, 1000));
 
-player.setCurrentTime(localStorage.getItem('videoplayer-current-time'));
+function setSavedCurrentTime() {
+  if (savedCurrentTime !== null) {
+    player.setCurrentTime(savedCurrentTime);
+    return;
+  }
+  localStorage.getItem('videoplayer-current-time', '0');
+}
+
 console.log(localStorage.getItem('videoplayer-current-time'));
