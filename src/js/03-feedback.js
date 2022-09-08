@@ -2,7 +2,7 @@ import localstorageService from './localstorage';
 import throttle from 'lodash.throttle';
 
 const feedbackFormEl = document.querySelector('.feedback-form');
-console.dir(feedbackFormEl);
+// console.dir(feedbackFormEl);
 let userData = {};
 
 const fillContactFormFields = () => {
@@ -24,7 +24,7 @@ const onFormFieldsChenge = evt => {
   const { target } = evt;
   userData[target.name] = target.value;
   localstorageService.save('feedback-form-state', userData);
-  console.log(target.value);
+  // console.log(target.value);
 };
 
 const onContactFormSubmit = event => {
